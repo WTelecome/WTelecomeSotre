@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WTelecome Ürün Kataloğu - Telefonlar, tabletler, akıllı saatler ve kulaklıkları detaylı bir şekilde inceleyin.">
+    <title>WTelecome - Ürün Kataloğu</title>
+
+    <!-- Manifest JSON içeriği -->
+    <script type="application/json" id="manifest-json">
+    {
+        "name": "WTelecome Ürün Kataloğu",
+        "short_name": "WTelecome",
+        "start_url": "/index.html",
+        "display": "standalone",
+        "background_color": "#1A2A44",
+        "theme_color": "#1A2A44",
+        "icons": [
+            {
+                "src": "wtelecome-logo.png",
+                "sizes": "192x192",
+                "type": "image/png"
+            }
+        ]
+    }
+    </script>
+
+    <!-- CSS içeriği (styles.css) -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1A2A44; /* Deep Purple tonu */
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #0F1A2F; /* Daha koyu bir deep purple tonu */
+            position: relative;
+        }
+
+        .logo {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #FFFFFF; /* Beyaz renk */
+        }
+
+        h1 {
+            margin: 10px 0;
+            font-size: 2em;
+        }
+
+        #language-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        #search {
+            text-align: center;
+            padding: 10px;
+        }
+
+        #search input {
+            padding: 5px;
+            width: 300px;
+            font-size: 1em;
+            background-color: #2A3B5A; /* Hafif açık mor ton */
+            color: #fff;
+            border: 1px solid #00AEEF; /* Mavi vurgu */
+        }
+
+        #filters {
+            text-align: center;
+            padding: 10px;
+        }
+
+        #filters label {
+            margin-right: 10px;
+        }
+
+        #filters select {
+            padding: 5px;
+            font-size: 1em;
+            margin-right: 10px;
+            background-color: #2A3B5A;
+            color: #fff;
+            border: 1px solid #00AEEF;
+        }
+
+        #compare-section {
+            text-align: center;
+            padding: 10px;
+        }
+
+        #compare-list {
+            margin: 10px 0;
+        }
+
+        #compare-button {
+            background-color: #FF0000; /* Kırmızı vurgu */
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #compare-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        #device-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .device-card {
+            background-color: #2A3B5A; /* Hafif açık mor ton */
+            border-radius: 10px;
+            width: 250px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.2s;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .device-card:hover {
+            transform: scale(1.05);
+        }
+
+        .device-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .device-card h3 {
+            margin: 10px 0;
+            font-size: 1.2em;
+        }
+
+        .device-card button {
+            background-color: #00AEEF; /* Mavi vurgu */
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .device-card button:hover {
+            background-color: #008BCF; /* Daha koyu mavi */
+        }
+
+        .device-card input[type="checkbox"] {
+            margin-top: 10px;
+        }
+
+        .color-circle {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        #store-info, #feedback {
+            text-align: center;
+            padding: 20px;
+        }
+
+        #feedback textarea {
+            width: 300px;
+            height: 100px;
+            background-color: #2A3B5A;
+            color: #fff;
+            border: 1px solid #00AEEF;
+        }
+
+        #feedback button {
+            background-color: #FF0000; /* Kırmızı vurgu */
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #feedback button:hover {
+            background-color: #E60000; /* Daha koyu kırmızı */
+        }
+
+        /* Modal Stilleri */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #2A3B5A;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .modal-content img {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .compare-modal-content {
+            max-width: 90%;
+            overflow-x: auto;
+        }
+
+        #compare-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        #compare-table th, #compare-table td {
+            border: 1px solid #fff;
+            padding: 10px;
+            text-align: left;
+        }
+
+        #compare-table th {
+            background-color: #0F1A2F;
+        }
+
+        .close, .close-compare {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover, .close-compare:hover {
+            color: #fff;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            WTelecome
+        </div>
+        <h1>WTelecome Ürün Kataloğu</h1>
+        <div id="language-switcher">
+            <label for="language-select">Dil:</label>
+            <select id="language-select" onchange="changeLanguage(this.value)">
+                <option value="tr">Türkçe</option>
+                <option value="az">Azərbaycanca</option>
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+            </select>
+        </div>
+    </header>
+    <main>
+        <section id="search">
+            <input type="text" id="search-input" placeholder="Cihaz ara..." onkeyup="searchDevices()">
+        </section>
+        <section id="filters">
+            <label for="category-filter">Kategori Seç:</label>
+            <select id="category-filter" onchange="advancedFilter()">
+                <option value="all">Tümü</option>
+                <option value="Telefon">Telefonlar</option>
+                <option value="Tablet">Tabletler</option>
+                <option value="Akıllı Saat">Akıllı Saatler</option>
+                <option value="Kulaklık">Kulaklıklar</option>
+            </select>
+            <label for="brand-filter">Marka Seç:</label>
+            <select id="brand-filter" onchange="advancedFilter()">
+                <option value="all">Tümü</option>
+                <option value="iPhone">Apple</option>
+                <option value="Samsung">Samsung</option>
+                <option value="Xiaomi">Xiaomi</option>
+            </select>
+            <label for="storage-filter">Depolama Seç:</label>
+            <select id="storage-filter" onchange="advancedFilter()">
+                <option value="all">Tümü</option>
+                <option value="128GB">128GB</option>
+                <option value="256GB">256GB</option>
+                <option value="512GB">512GB</option>
+            </select>
+            <label for="sort-filter">Sırala:</label>
+            <select id="sort-filter" onchange="sortDevices()">
+                <option value="default">Varsayılan</option>
+                <option value="weight-asc">Ağırlık (Artan)</option>
+                <option value="weight-desc">Ağırlık (Azalan)</option>
+            </select>
+        </section>
+        <section id="compare-section">
+            <h3>Karşılaştırma</h3>
+            <div id="compare-list"></div>
+            <button id="compare-button" onclick="showComparison()" disabled>Karşılaştır</button>
+        </section>
+        <section id="device-list">
+            <!-- Cihazlar buraya dinamik olarak eklenecek -->
+        </section>
+        <section id="store-info">
+            <h3>Mağazamızı Ziyaret Edin</h3>
+            <p>Adres: [Mağaza adresiniz]</p>
+            <p>Telefon: [Telefon numaranız]</p>
+            <a href="https://wa.me/[Telefon Numaranız]" target="_blank">Bize WhatsApp'tan Ulaşın</a>
+        </section>
+        <section id="feedback">
+            <h3>Geri Bildirim</h3>
+            <textarea id="feedback-input" placeholder="Görüşlerinizi yazın..."></textarea>
+            <button onclick="submitFeedback()">Gönder</button>
+        </section>
+    </main>
+
+    <!-- Detay Modal -->
+    <div id="deviceModal" class="modal">
+        <div class="modal-content">
+            <span class="close">×</span>
+            <h2 id="modal-title"></h2>
+            <img id="modal-image" src="" alt="Device Image">
+            <p><strong>Renk Seçenekleri:</strong> <span id="modal-colors"></span></p>
+            <p><strong>Depolama Seçenekleri:</strong> <span id="modal-storage"></span></p>
+            <h3>Özellikler</h3>
+            <ul id="modal-specs"></ul>
+            <button onclick="shareDevice()">Paylaş</button>
+            <div id="similar-devices"></div>
+        </div>
+    </div>
+
+    <!-- Karşılaştırma Modal -->
+    <div id="compareModal" class="modal">
+        <div class="modal-content compare-modal-content">
+            <span class="close-compare">×</span>
+            <h2>Ürün Karşılaştırma</h2>
+            <div id="compare-table"></div>
+        </div>
+    </div>
+
+    <!-- JavaScript içeriği (script.js) -->
+    <script>
+        // Çeviriler
+        const translations = {
+            "tr": {
+                "Tümü": "Tümü",
+                "Telefonlar": "Telefonlar",
+                "Tabletler": "Tabletler",
+                "Akıllı Saatler": "Akıllı Saatler",
+                "Kulaklıklar": "Kulaklıklar",
+                "Cihaz ara...": "Cihaz ara...",
+                "Kategori Seç": "Kategori Seç:",
+                "Marka Seç": "Marka Seç:",
+                "Depolama Seç": "Depolama Seç:",
+                "Sırala": "Sırala:",
+                "Varsayılan": "Varsayılan",
+                "Ağırlık (Artan)": "Ağırlık (Artan)",
+                "Ağırlık (Azalan)": "Ağırlık (Azalan)",
+                "Karşılaştırma": "Karşılaştırma",
+                "Karşılaştır": "Karşılaştır",
+                "Detayları Gör": "Detayları Gör",
+                "Karşılaştırmaya Ekle": "Karşılaştırmaya Ekle",
+                "Mağazamızı Ziyaret Edin": "Mağazamızı Ziyaret Edin",
+                "Geri Bildirim": "Geri Bildirim",
+                "Görüşlerinizi yazın...": "Görüşlerinizi yazın...",
+                "Gönder": "Gönder",
+                "Renk Seçenekleri": "Renk Seçenekleri:",
+                "Depolama Seçenekleri": "Depolama Seçenekleri:",
+                "Özellikler": "Özellikler",
+                "Paylaş": "Paylaş",
+                "Benzer Ürünler": "Benzer Ürünler"
+            },
+            "az": {
+                "Tümü": "Hamısı",
+                "Telefonlar": "Telefonlar",
+                "Tabletler": "Planşetlər",
+                "Akıllı Saatler": "Ağıllı Saatlar",
+                "Kulaklıklar": "Qulaqlıqlar",
+                "Cihaz ara...": "Cihaz axtar...",
+                "Kategori Seç": "Kateqoriya Seç:",
+                "Marka Seç": "Marka Seç:",
+                "Depolama Seç": "Yaddaş Seç:",
+                "Sırala": "Sırala:",
+                "Varsayılan": "Varsayılan",
+                "Ağırlık (Artan)": "Çəki (Artan)",
+                "Ağırlık (Azalan)": "Çəki (Azalan)",
+                "Karşılaştırma": "Müqayisə",
+                "Karşılaştır": "Müqayisə et",
+                "Detayları Gör": "Təfərrüatlara Bax",
+                "Karşılaştırmaya Ekle": "Müqayisəyə Əlavə Et",
+                "Mağazamızı Ziyaret Edin": "Mağazamızı Ziyarət Edin",
+                "Geri Bildirim": "Rəy",
+                "Görüşlerinizi yazın...": "Rəylərinizi yazın...",
+                "Gönder": "Göndər",
+                "Renk Seçenekleri": "Rəng Seçimləri:",
+                "Depolama Seçenekleri": "Yaddaş Seçimləri:",
+                "Özellikler": "Xüsusiyyətlər",
+                "Paylaş": "Paylaş",
+                "Benzer Ürünler": "Oxşar Məhsullar"
+            },
+            "en": {
+                "Tümü": "All",
+                "Telefonlar": "Phones",
+                "Tabletler": "Tablets",
+                "Akıllı Saatler": "Smart Watches",
+                "Kulaklıklar": "Earphones",
+                "Cihaz ara...": "Search device...",
+                "Kategori Seç": "Select Category:",
+                "Marka Seç": "Select Brand:",
+                "Depolama Seç": "Select Storage:",
+                "Sırala": "Sort:",
+                "Varsayılan": "Default",
+                "Ağırlık (Artan)": "Weight (Ascending)",
+                "Ağırlık (Azalan)": "Weight (Descending)",
+                "Karşılaştırma": "Comparison",
+                "Karşılaştır": "Compare",
+                "Detayları Gör": "View Details",
+                "Karşılaştırmaya Ekle": "Add to Comparison",
+                "Mağazamızı Ziyaret Edin": "Visit Our Store",
+                "Geri Bildirim": "Feedback",
+                "Görüşlerinizi yazın...": "Write your feedback...",
+                "Gönder": "Submit",
+                "Renk Seçenekleri": "Color Options:",
+                "Depolama Seçenekleri": "Storage Options:",
+                "Özellikler": "Specifications",
+                "Paylaş": "Share",
+                "Benzer Ürünler": "Similar Products"
+            },
+            "ru": {
+                "Tümü": "Все",
+                "Telefonlar": "Телефоны",
+                "Tabletler": "Планшеты",
+                "Akıllı Saatler": "Умные часы",
+                "Kulaklıklar": "Наушники",
+                "Cihaz ara...": "Поиск устройства...",
+                "Kategori Seç": "Выберите категорию:",
+                "Marka Seç": "Выберите бренд:",
+                "Depolama Seç": "Выберите объем памяти:",
+                "Sırala": "Сортировать:",
+                "Varsayılan": "По умолчанию",
+                "Ağırlık (Artan)": "Вес (по возрастанию)",
+                "Ağırlık (Azalan)": "Вес (по убыванию)",
+                "Karşılaştırma": "Сравнение",
+                "Karşılaştır": "Сравнить",
+                "Detayları Gör": "Посмотреть детали",
+                "Karşılaştırmaya Ekle": "Добавить к сравнению",
+                "Mağazamızı Ziyaret Edin": "Посетите наш магазин",
+                "Geri Bildirim": "Обратная связь",
+                "Görüşlerinizi yazın...": "Напишите ваш отзыв...",
+                "Gönder": "Отправить",
+                "Renk Seçenekleri": "Варианты цвета:",
+                "Depolama Seçenekleri": "Варианты памяти:",
+                "Özellikler": "Характеристики",
+                "Paylaş": "Поделиться",
+                "Benzer Ürünler": "Похожие товары"
+            }
+        };
+
+        // Renkleri hex kodlarına çevirme (örnek)
+        function colorToHex(color) {
+            const colors = {
+                "Midnight": "#1C2526",
+                "Starlight": "#F5F5FA",
+                "Blue": "#007AFF",
+                "Pink": "#FF2D55",
+                "Green": "#34C759",
+                "Purple": "#AF52DE",
+                "Red": "#FF3B30",
+                "Black": "#000000",
+                "Yellow": "#FFCC00",
+                "White": "#FFFFFF",
+                "Black Titanium": "#1C2526",
+                "White Titanium": "#F5F5FA",
+                "Blue Titanium": "#007AFF",
+                "Natural Titanium": "#D4D4D2",
+                "Teal": "#40C4FF",
+                "Ultramarine": "#3F51B5",
+                "Desert Titanium": "#C19A6B",
+                "Phantom Black": "#1C2526",
+                "Cream": "#FFFDD0",
+                "Lavender": "#E6E6FA",
+                "Onyx Black": "#1C2526",
+                "Marble Gray": "#B0BEC5",
+                "Cobalt Violet": "#8E24AA",
+                "Amber Yellow": "#FFCA28",
+                "Titanium Black": "#1C2526",
+                "Titanium Gray": "#B0BEC5",
+                "Titanium Violet": "#8E24AA",
+                "Titanium Yellow": "#FFCA28",
+                "Silver": "#C0C0C0",
+                "Pink Gold": "#FF9999",
+                "Titanium Silver": "#C0C0C0",
+                "Titanium Blue": "#007AFF",
+                "Titanium Gold": "#FFD700",
+                "Graphite": "#616161",
+                "Navy": "#000080",
+                "Awesome Black": "#1C2526",
+                "Awesome White": "#FFFFFF",
+                "Awesome Violet": "#8E24AA",
+                "Light Blue": "#ADD8E6",
+                "Jet Black Aluminum": "#1C2526",
+                "Silver Aluminum": "#C0C0C0",
+                "Rose Gold Aluminum": "#FF9999",
+                "Glossy Black Titanium": "#1C2526",
+                "Gold Titanium": "#FFD700",
+                "Space Gray": "#616161",
+                "Sky Blue": "#87CEEB",
+                "Titan Gray": "#B0BEC5",
+                "Titan Black": "#1C2526",
+                "Titan Blue": "#007AFF",
+                "Lemon Green": "#9ACD32"
+            };
+            return colors[color] || "#000000";
+        }
+
+        // Cihazlar
+        const devices = [
+            {
+                category: "Telefon",
+                name: "iPhone 13",
+                colors: ["Midnight", "Starlight", "Blue", "Pink", "Green"],
+                storage: ["128GB", "256GB", "512GB"],
+                specs: [
+                    "Ekran: 6.1 inç Super Retina XDR",
+                    "İşlemci: A15 Bionic",
+                    "Kamera: 12 MP Çift Kamera",
+                    "Batarya: 3240 mAh",
+                    "Ağırlık: 174g"
+                ],
+                image: "https://via.placeholder.com/300x200?text=iPhone+13"
+            },
+            {
+                category: "Telefon",
+                name: "iPhone 14",
+                colors: ["Midnight", "Purple", "Starlight", "Blue", "Red"],
+                storage: ["128GB", "256GB", "512GB"],
+                specs: [
+                    "Ekran: 6.1 inç Super Retina XDR",
+                    "İşlemci: A15 Bionic",
+                    "Kamera: 12 MP Çift Kamera",
+                    "Batarya: 3279 mAh",
+                    "Ağırlık: 172g"
+                ],
+                image: "https://via.placeholder.com/300x200?text=iPhone+14"
+            },
+            {
+                category: "Telefon",
+                name: "iPhone 15",
+                colors: ["Black", "Blue", "Green", "Yellow", "Pink"],
+                storage: ["128GB", "256GB", "512GB"],
+                specs: [
+                    "Ekran: 6.1 inç Super Retina XDR",
+                    "İşlemci: A16 Bionic",
+                    "Kamera: 48 MP Ana Kamera + 12 MP Ultra Geniş",
+                    "Batarya: 3349 mAh",
+                    "Ağırlık: 171g"
+                ],
+                image: "https://via.placeholder.com/300x200?text=iPhone+15"
+            },
+            {
+                category: "Telefon",
+                name: "iPhone 15 Pro",
+                colors: ["Black Titanium", "White Titanium", "Blue Titanium", "Natural Titanium"],
+                storage: ["128GB", "256GB", "512GB"],
+                specs: [
+                    "Ekran: 6.1 inç Super Retina XDR",
+                    "İşlemci: A17 Pro",
+                    "Kamera: 48 MP Ana Kamera + 12 MP Ultra Geniş + 12 MP Telefoto",
+                    "Batarya: 3274 mAh",
+                    "Ağırlık: 187g"
+                ],
+                image: "https://via.placeholder.com/300x200?text=iPhone+15+Pro"
+            },
+            {
+                category: "Telefon",
+                name: "iPhone 15 Pro Max",
+                colors: ["Black Titanium", "White Titanium", "Blue Titanium", "Natural Titanium"],
+                storage: ["256GB", "512GB"],
+                specs: [
+                    "Ekran: 6.7 inç Super Retina XDR",
+                    "İşlemci: A17 Pro",
+                    "Kamera: 48 MP Ana Kamera + 12 MP Ultra Geniş + 12 MP Telefoto",
+                    "Batarya: 4422 mAh",
+                    "Ağırlık: 221g"
+                ],
+                image: "https://via.placeholder.com/300x200?text=iPhone+15+Pro+Max"
+            },
+            {
+                category: "Telefon",
+                name: "iPhone 16",
+                colors: ["Black", "White", "Pink", "Teal", "Ultramarine"],
+                storage: ["128GB", "256GB", "512GB"],
+                specs: [
+                    "Ekran: 6.1 inç Super Retina XDR",
+                    "İşlemci: A18 Bionic",
+                    "Kamera: 48 MP Ana Kamera + 12 MP Ultra Geniş",
+                    "Batarya: 3561 mAh",
+                    "Ağırlık: 170g"
+                ],
+                image: "https://via.placeholder.com/300x200?text=iPhone+16"
+            },
+            {
+                category: "Telefon",
+                name: "iPhone 16 Pro",
+                colors: ["Black Titanium", "White Titanium", "Natural Titanium", "Desert Titanium"],
+                storage: ["128GB", "256GB", "512GB"],
+                specs: [
+                    "Ekran: 6.3 inç Super Retina XDR",
+                    "İşlemci: A18 Pro",
+                    "Kamera: 48 MP Ana Kamera + 12 MP Ultra Geniş + 12 MP Telefoto",
+                    "Batarya: 3582 mAh",
+                    "Ağırlık: 199g"
+                ],
+                image: "https://via.placeholder.com/300x200?text=iPhone+16+Pro"
+            },
+            {
+                category: "Telefon",
+                name: "iPhone 16 Pro Max",
+                colors: ["Black Titanium", "White Titanium", "Natural Titanium", "Desert Titanium"],
+                storage: ["256GB", "512GB"],
+                specs: [
+                    "Ekran: 6.9 inç Super Retina XDR",
+                    "İşlemci: A18 Pro",
+                    "Kamera: 48 MP Ana Kamera + 12 MP Ultra Geniş + 12 MP Telefoto",
+                    "Batarya: 4685 mAh",
+                    "Ağırlık: 227g"
+                ],
+                image: "https://via.placeholder.com/300x200?text=iPhone+16+Pro+Max"
+            },
+            {
+                category: "Telefon",
+                name: "iPhone 16 Plus",
+                colors: ["Black", "White", "Pink", "Teal", "Ultramarine"],
+                storage: ["128GB", "256GB", "512GB"],
+                specs: [
+                    "Ekran: 6.7 inç Super Retina XDR",
+                    "İşlemci: A18 Bionic",
+                    "Kamera: 48 MP Ana Kamera + 12 MP Ultra Geniş",
+                    "Batarya: 4006 mAh",
+                    "Ağırlık: 203g"
+                ],
+                image: "https://via.placeholder.com/300x200?text=iPhone+16+Plus"
+            },
+            {
+                category: "Telefon",
+                name: "Samsung Galaxy S23 Ultra",
+                colors: ["Phantom Black", "Green", "Cream", "Lavender"],
+                storage: ["256GB", "512GB"],
+                specs: [
+                    "Ekran: 6.8 inç Dynamic AMOLED 2X",
+                    "İşlemci: Snapdragon 8 Gen 2",
+                    "Kamera: 200 MP Ana Kamera + 12 MP Ultra Geniş + 10 MP Telefoto",
+                    "Batarya: 5000 mAh",
+                    "Ağırlık: 234g"
+                ],
+                image: "https://via.placeholder.com/300x200?text=Galaxy+S23+Ultra"
+            },
+            {
+                category: "Telefon",
+                name: "Samsung Galaxy S24",
+                colors: ["Onyx Black", "Marble Gray", "Cobalt Violet", "Amber Yellow"],
+                storage: ["128GB", "256GB", "512GB"],
+                specs: [
+                    "Ekran: 6.2 inç Dynamic AMOLED 2X",
+                    "İşlemci: Snapdragon 8 Gen 3",
+                    "Kamera: 50 MP Ana Kamera + 12 MP Ultra Geniş + 10 MP Telefoto",
+                    "Batarya: 4000 mAh",
+                    "Ağırlık: 167g"
+                ],
+                image: "https://via.placeholder.com/300x200?text=Galaxy+S24"
+            },
+            {
+                category: "Telefon",
+                name: "Samsung Galaxy S24 Ultra",
+                colors: ["Titanium Black", "Titanium Gray", "Titanium Violet", "Titanium Yellow"],
+                storage: ["256GB", "512GB"],
+                specs: [
+                    "Ekran: 6.8 inç Dynamic AMOLED 2X",
+                    "İşlemci: Snapdragon 8 Gen 3",
+                    "Kamera: 200 MP Ana Kamera + 12 MP Ultra Geniş + 10 MP Telefoto",
+                    "Batarya: 5000 mAh",
+                    "Ağırlık: 232g"
+                ],
+                image: "https://via.placeholder.com/300x200?text=Galaxy+S24+Ultra"
+            },
+            {
+                category: "Telefon",
+                name: "Samsung Galaxy S25",
+                colors: ["Phantom Black", "Silver", "Blue", "Pink Gold"],
+                storage: ["128GB", "256GB", "512GB"],
+                specs: [
+                    "Ekran: 6.2 inç Dynamic AMOLED 2X",
+                    "İşlemci: Snapdragon 8 Gen 4 (tahmini)",
+                    "Kamera: 50 MP Ana Kamera + 12 MP Ultra Geniş + 10 MP Telefoto",
+                    "Batarya: 4100 mAh (tahmini)",
+                    "Ağırlık: 168g (tahmini)"
+                ],
+                image: "https://via.placeholder.com/300x200?text=Galaxy+S25"
+            },
+            {
+                category: "Telefon",
+                name: "Samsung Galaxy S25 Ultra",
+                colors: ["Titanium Black", "Titanium Silver", "Titanium Blue", "Titanium Gold"],
+                storage: ["256GB", "512GB"],
+                specs: [
+                    "Ekran: 6.8 inç Dynamic AMOLED 2X",
+                    "İşlemci: Snapdragon 8 Gen 4 (tahmini)",
+                    "Kamera: 200 MP Ana Kamera + 12 MP Ultra Geniş + 10 MP Telefoto",
+                    "Batarya: 5000 mAh (tahmini)",
+                    "Ağırlık: 230g (tahmini)"
+                ],
+                image: "https://via.placeholder.com/300x200?text=Galaxy+S25+Ultra"
+            },
+            {
+                category: "Tablet",
+                name: "Samsung Galaxy Tab A9",
+                colors: ["Graphite", "Silver", "Navy"],
+                storage: ["128GB"],
+                specs: [
+                    "Ekran: 8.7 inç TFT",
+                    "İşlemci: MediaTek Helio G99",
+                    "Kamera: 8 MP Arka + 2 MP Ön",
+                    "Batarya: 5100 mAh",
+                    "Ağırlık: 333g"
+                ],
+                image: "https://via.placeholder.com/300x200?text=Galaxy+Tab+A9"
+            },
+            {
+                category: "Telefon",
+                name: "Samsung Galaxy A55",
+                colors: ["Awesome Black", "Awesome White", "Awesome Violet"],
+                storage: ["128GB", "256GB"],
+                specs: [
+                    "Ekran: 6.5 inç Super AMOLED",
+                    "İşlemci: Exynos 1480",
+                    "Kamera: 50 MP Ana Kamera + 12 MP Ultra Geniş + 5 MP Makro",
+                    "Batarya: 5000 mAh",
+                    "Ağırlık: 213g"
+                ],
+                image: "https://via.placeholder.com/300x200?text=Galaxy+A55"
+            },
+            {
+                category: "Telefon",
+                name: "Samsung Galaxy A56",
+                colors: ["Black", "White", "Blue"],
+                storage: ["128GB", "256GB"],
+                specs: [
+                    "Ekran: 6.6 inç Super AMOLED (tahmini)",
+                    "İşlemci: Exynos 1580 (tahmini)",
+                    "Kamera: 50 MP Ana Kamera + 12 MP Ultra Geniş + 5 MP Makro (tahmini)",
+                    "Batarya: 5000 mAh (tahmini)",
+                    "Ağırlık: 210g (tahmini)"
+                ],
+                image: "https://via.placeholder.com/300x200?text=Galaxy+A56"
+            },
+            {
+                category: "Telefon",
+                name: "Samsung Galaxy A06",
+                colors: ["Black", "White", "Light Blue"],
+                storage: ["128GB"],
+                specs: [
+                    "Ekran: 6.7 inç PLS LCD",
+                    "İşlemci: MediaTek Helio G85",
+                    "Kamera: 50 MP Ana Kamera + 2 MP Derinlik",
+                    "Batarya: 5000 mAh",
+                    "Ağırlık: 195g"
+                ],
+                image: "https://via.placeholder.com/300x200?text=Galaxy+A06"
+            },
+            {
+                category: "Telefon",
+                name: "Samsung Galaxy A16",
+                colors: ["Black", "White", "Blue"],
+                storage: ["128GB"],
+                specs: [
+                    "Ekran: 6.6 inç PLS LCD",
+                    "İşlemci: MediaTek Dimensity 6100+",
+                    "Kamera: 50 MP Ana Kamera + 5 MP Ultra Geniş + 2 MP Makro",
+                    "Batarya: 5000 mAh",
+                    "Ağırlık: 200g"
+                ],
+                image: "https://via.placeholder.com/300x200?text=Galaxy+A16"
+            },
+            {
+                category: "Tablet",
+                name: "iPad (10th Gen) Wi-Fi",
+                colors: ["Silver", "Blue", "Pink", "Yellow"],
+                storage: ["64GB", "256GB"],
+                specs: [
+                    "Ekran: 10.9 inç Liquid Retina (2360x1640)",
+                    "İşlemci: A14 Bionic",
+                    "Kamera: 12 MP Arka (f/1.8) + 12 MP Ultra Geniş Ön (122° görüş alanı)",
+                    "Batarya: 28.6 watt-saat (yaklaşık 10 saat web gezinme veya video izleme)",
+                    "Ağırlık: 477g",
+                    "Diğer: Apple Pencil (1. Nesil) ve Magic Keyboard Folio desteği, USB-C bağlantı noktası, Wi-Fi 6"
+                ],
+                image: "https://via.placeholder.com/300x200?text=iPad+10th+Gen+WiFi"
+            },
+            {
+                category: "Tablet",
+                name: "iPad (10th Gen) Wi-Fi + Cellular",
+                colors: ["Silver", "Blue", "Pink", "Yellow"],
+                storage: ["64GB", "256GB"],
+                specs: [
+                    "Ekran: 10.9 inç Liquid Retina (2360x1640)",
+                    "İşlemci: A14 Bionic",
+                    "Kamera: 12 MP Arka (f/1.8) + 12 MP Ultra Geniş Ön (122° görüş alanı)",
+                    "Batarya: 28.6 watt-saat (yaklaşık 10 saat web gezinme veya video izleme)",
+                    "Ağırlık: 481g",
+                    "Diğer: Apple Pencil (1. Nesil) ve Magic Keyboard Folio desteği, USB-C bağlantı noktası, Wi-Fi 6, 5G"
+                ],
+                image: "https://via.placeholder.com/300x200?text=iPad+10th+Gen+Cellular"
+            },
+            {
+                category: "Akıllı Saat",
+                name: "Apple Watch Series 10 (41mm) GPS",
+                colors: ["Jet Black Aluminum", "Silver Aluminum", "Rose Gold Aluminum"],
+                storage: ["32GB"],
+                specs: [
+                    "Ekran: Geniş açılı OLED Retina (41mm, 1.69 inç, 430x352 piksel)",
+                    "İşlemci: S10 SiP",
+                    "Sensörler: Kalp atış hızı sensörü, EKG, uyku apnesi bildirimi, sıcaklık sensörü, derinlik ve su sıcaklığı sensörleri",
+                    "Batarya: 80% şarj için 30 dakikada hızlı şarj, tüm gün kullanım (18 saat)",
+                    "Ağırlık: 29.3g",
+                    "Diğer: Su geçirmezlik (50 metre), Fitness+ entegrasyonu, Vitals uygulaması"
+                ],
+                image: "https://via.placeholder.com/300x200?text=Apple+Watch+Series+10+41mm+GPS"
+            },
+            {
+                category: "Akıllı Saat",
+                name: "Apple Watch Series 10 (41mm) GPS + Cellular",
+                colors: ["Jet Black Aluminum", "Silver Aluminum", "Rose Gold Aluminum", "Glossy Black Titanium", "Natural Titanium", "Gold Titanium"],
+                storage: ["32GB"],
+                specs: [
+                    "Ekran: Geniş açılı OLED Retina (41mm, 1.69 inç, 430x352 piksel)",
+                    "İşlemci: S10 SiP",
+                    "Sensörler: Kalp atış hızı sensörü, EKG, uyku apnesi bildirimi, sıcaklık sensörü, derinlik ve su sıcaklığı sensörleri",
+                    "Batarya: 80% şarj için 30 dakikada hızlı şarj, tüm gün kullanım (18 saat)",
+                    "Ağırlık: 29.3g (alüminyum kasa), 35.3g (titanyum kasa)",
+                    "Diğer: Su geçirmezlik (50 metre), Fitness+ entegrasyonu, Vitals uygulaması, Hücresel bağlantı"
+                ],
+                image: "https://via.placeholder.com/300x200?text=Apple+Watch+Series+10+41mm+Cellular"
+            },
+            {
+                category: "Akıllı Saat",
+                name: "Apple Watch Series 10 (45mm) GPS",
+                colors: ["Jet Black Aluminum", "Silver Aluminum", "Rose Gold Aluminum"],
+                storage: ["32GB"],
+                specs: [
+                    "Ekran: Geniş açılı OLED Retina (45mm, 1.9 inç, 484x396 piksel)",
+                    "İşlemci: S10 SiP",
+                    "Sensörler: Kalp atış hızı sensörü, EKG, uyku apnesi bildirimi, sıcaklık sensörü, derinlik ve su sıcaklığı sensörleri",
+                    "Batarya: 80% şarj için 30 dakikada hızlı şarj, tüm gün kullanım (18 saat)",
+                    "Ağırlık: 35.3g",
+                    "Diğer: Su geçirmezlik (50 metre), Fitness+ entegrasyonu, Vitals uygulaması"
+                ],
+                image: "https://via.placeholder.com/300x200?text=Apple+Watch+Series+10+45mm+GPS"
+            },
+            {
+                category: "Akıllı Saat",
+                name: "Apple Watch Series 10 (45mm) GPS + Cellular",
+                colors: ["Jet Black Aluminum", "Silver Aluminum", "Rose Gold Aluminum", "Glossy Black Titanium", "Natural Titanium", "Gold Titanium"],
+                storage: ["32GB"],
+                specs: [
+                    "Ekran: Geniş açılı OLED Retina (45mm, 1.9 inç, 484x396 piksel)",
+                    "İşlemci: S10 SiP",
+                    "Sensörler: Kalp atış hızı sensörü, EKG, uyku apnesi bildirimi, sıcaklık sensörü, derinlik ve su sıcaklığı sensörleri",
+                    "Batarya: 80% şarj için 30 dakikada hızlı şarj, tüm gün kullanım (18 saat)",
+                    "Ağırlık: 35.3g (alüminyum kasa), 41.7g (titanyum kasa)",
+                    "Diğer: Su geçirmezlik (50 metre), Fitness+ entegrasyonu, Vitals uygulaması, Hücresel bağlantı"
+                ],
+                image: "https://via.placeholder.com/300x200?text=Apple+Watch+Series+10+45mm+Cellular"
+            },
+            {
+                category: "Kulaklık",
+                name: "AirPods (2nd Generation)",
+                colors: ["White"],
+                storage: ["N/A"],
+                specs: [
+                    "Çip: H1",
+                    "Batarya: Tek şarjla 5 saate kadar dinleme süresi, şarj kutusuyla 24 saate kadar",
+                    "Bağlantı: Lightning Şarj Kutusu",
+                    "Diğer: Hey Siri, otomatik açılma ve bağlanma, çift dokunuşla kontrol"
+                ],
+                image: "https://via.placeholder.com/300x200?text=AirPods+2nd+Gen"
+            },
+            {
+                category: "Kulaklık",
+                name: "AirPods (3rd Generation)",
+                colors: ["White"],
+                storage: ["N/A"],
+                specs: [
+                    "Çip: H1",
+                    "Batarya: Tek şarjla 6 saate kadar dinleme süresi (Uzamsal Ses etkinleştirilmişken 5 saat), şarj kutusuyla 30 saate kadar",
+                    "Bağlantı: MagSafe Şarj Kutusu (Lightning)",
+                    "Diğer: Dinamik kafa izleme özellikli Kişiselleştirilmiş Uzamsal Ses, IPX4 tere ve suya dayanıklılık, Hey Siri"
+                ],
+                image: "https://via.placeholder.com/300x200?text=AirPods+3rd+Gen"
+            },
+            {
+                category: "Kulaklık",
+                name: "AirPods 4",
+                colors: ["White"],
+                storage: ["N/A"],
+                specs: [
+                    "Çip: H2",
+                    "Batarya: Tek şarjla 5 saate kadar dinleme süresi, şarj kutusuyla 30 saate kadar",
+                    "Bağlantı: USB-C Şarj Kutusu",
+                    "Diğer: Dinamik kafa izleme özellikli Kişiselleştirilmiş Uzamsal Ses, Ses İzolasyonu, Hey Siri, IP54 toza, tere ve suya dayanıklılık"
+                ],
+                image: "https://via.placeholder.com/300x200?text=AirPods+4"
+            },
+            {
+                category: "Kulaklık",
+                name: "AirPods 4 with Active Noise Cancellation",
+                colors: ["White"],
+                storage: ["N/A"],
+                specs: [
+                    "Çip: H2",
+                    "Batarya: Tek şarjla 5 saate kadar dinleme süresi (ANC ile 4 saat), şarj kutusuyla 30 saate kadar (ANC ile 20 saat)",
+                    "Bağlantı: Kablosuz Şarj Kutusu (USB-C), Apple Watch şarj aygıtı ve Qi sertifikalı şarj aygıtı uyumlu",
+                    "Diğer: Aktif Gürültü Engelleme, Adaptif Ses, Şeffaf mod, Dinamik kafa izleme özellikli Kişiselleştirilmiş Uzamsal Ses, IP54 toza, tere ve suya dayanıklılık, Hey Siri"
+                ],
+                image: "https://via.placeholder.com/300x200?text=AirPods+4+ANC"
+            },
+            {
+                category: "Kulaklık",
+                name: "AirPods Pro 2",
+                colors: ["White"],
+                storage: ["N/A"],
+                specs: [
+                    "Çip: H2",
+                    "Batarya: Tek şarjla 6 saate kadar dinleme süresi (ANC ile 5.5 saat), şarj kutusuyla 30 saate kadar",
+                    "Bağlantı: MagSafe Şarj Kutusu (USB-C), Apple Watch şarj aygıtı ve Qi sertifikalı şarj aygıtı uyumlu",
+                    "Diğer: 2 kata kadar daha fazla Aktif Gürültü Engelleme, Adaptif Ses, Şeffaf mod, Dinamik kafa izleme özellikli Kişiselleştirilmiş Uzamsal Ses, IP54 toza, tere ve suya dayanıklılık, Hey Siri, İşitme Sağlığı özellikleri (Yüksek Sesleri Azaltma, Konuşma Yükseltme)"
+                ],
+                image: "https://via.placeholder.com/300x200?text=AirPods+Pro+2"
+            },
+            {
+                category: "Kulaklık",
+                name: "AirPods Max",
+                colors: ["Space Gray", "Silver", "Sky Blue", "Green", "Pink"],
+                storage: ["N/A"],
+                specs: [
+                    "Çip: H1 (her kulaklıkta bir tane)",
+                    "Batarya: Tek şarjla 20 saate kadar dinleme süresi (ANC veya Şeffaf mod ile)",
+                    "Bağlantı: Lightning konektörü",
+                    "Diğer: Aktif Gürültü Engelleme, Şeffaf mod, Dinamik kafa izleme özellikli Kişiselleştirilmiş Uzamsal Ses, 9 mikrofon, 40 mm Apple tasarımı dinamik sürücü"
+                ],
+                image: "https://via.placeholder.com/300x200?text=AirPods+Max"
+            },
+            {
+                category: "Telefon",
+                name: "Xiaomi 14T",
+                colors: ["Titan Gray", "Titan Black", "Titan Blue", "Lemon Green"],
+                storage: ["256GB", "512GB"],
+                specs: [
+                    "Ekran: 6.67 inç AMOLED, 144 Hz, 4000 cd/m² (maks.)",
+                    "İşlemci: MediaTek Dimensity 8300-Ultra",
+                    "Kamera: 50 MP Leica Ana Kamera (Sony IMX906) + 12 MP Ultra Geniş + 50 MP Telefoto",
+                    "Batarya: 5000 mAh, 67W Hızlı Şarj",
+                    "Ağırlık: 195g",
+                    "Diğer: IP68 suya ve toza dayanıklılık, Dolby Atmos, Wi-Fi 7, Yapay Zeka destekli özellikler"
+                ],
+                image: "https://via.placeholder.com/300x200?text=Xiaomi+14T"
+            },
+            {
+                category: "Telefon",
+                name: "Xiaomi 14T Pro",
+                colors: ["Titan Gray", "Titan Black", "Titan Blue"],
+                storage: ["256GB", "512GB"],
+                specs: [
+                    "Ekran: 6.67 inç AMOLED, 144 Hz, 4000 cd/m² (maks.)",
+                    "İşlemci: MediaTek Dimensity 9300+",
+                    "Kamera: 50 MP Leica Ana Kamera (Light Fusion 900) + 12 MP Ultra Geniş + 50 MP Telefoto",
+                    "Batarya: 5000 mAh, 120W Ultra Hızlı Şarj, 50W Kablosuz Şarj",
+                    "Ağırlık: 209g",
+                    "Diğer: IP68 suya ve toza dayanıklılık, Dolby Atmos, Wi-Fi 7, Yapay Zeka destekli özellikler, 8K video kaydı"
+                ],
+                image: "https://via.placeholder.com/300x200?text=Xiaomi+14T+Pro"
+            }
+        ];
+
+        // Cihaz kartlarını oluştur
+        const deviceList = document.getElementById('device-list');
+        let selectedDevices = [];
+        let currentLang = 'tr';
+
+        function renderDevices(filteredDevices) {
+            deviceList.innerHTML = '';
+            filteredDevices.forEach(device => {
+                const card = document.createElement('div');
+                card.classList.add('device-card');
+                card.innerHTML = `
+                    <img src="${device.image}" alt="${device.name} Görseli" loading="lazy">
+                    <h3>${device.name}</h3>
+                    <button onclick="openModal('${device.name}')">${translations[currentLang]["Detayları Gör"]}</button>
+                    <br>
+                    <input type="checkbox" onchange="toggleCompare('${device.name}', this.checked)"> ${translations[currentLang]["Karşılaştırmaya Ekle"]}
+                `;
+                deviceList.appendChild(card);
+            });
+        }
+
+        // Arama
+        function searchDevices() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const filteredDevices = devices.filter(device => device.name.toLowerCase().includes(query));
+            renderDevices(filteredDevices);
+        }
+
+        // Gelişmiş Filtreleme
+        function advancedFilter() {
+            const category = document.getElementById('category-filter').value;
+            const brand = document.getElementById('brand-filter').value;
+            const storage = document.getElementById('storage-filter').value;
+
+            let filteredDevices = devices;
+            if (category !== 'all') {
+                filteredDevices = filteredDevices.filter(device => device.category === category);
+            }
+            if (brand !== 'all') {
+                filteredDevices = filteredDevices.filter(device => device.name.includes(brand));
+            }
+            if (storage !== 'all') {
+                filteredDevices = filteredDevices.filter(device => device.storage.includes(storage));
+            }
+            renderDevices(filteredDevices);
+        }
+
+        // Sıralama
+        function sortDevices() {
+            const sortBy = document.getElementById('sort-filter').value;
+            let sortedDevices = [...devices];
+            if (sortBy === 'weight-asc') {
+                sortedDevices.sort((a, b) => parseFloat(a.specs.find(spec => spec.includes('Ağırlık')).match(/\d+/)) - parseFloat(b.specs.find(spec => spec.includes('Ağırlık')).match(/\d+/)));
+            } else if (sortBy === 'weight-desc') {
+                sortedDevices.sort((a, b) => parseFloat(b.specs.find(spec => spec.includes('Ağırlık')).match(/\d+/)) - parseFloat(a.specs.find(spec => spec.includes('Ağırlık')).match(/\d+/)));
+            }
+            renderDevices(sortedDevices);
+        }
+
+        // Karşılaştırma için cihaz seçimi
+        function toggleCompare(deviceName, isChecked) {
+            if (isChecked) {
+                if (selectedDevices.length < 4) {
+                    selectedDevices.push(deviceName);
+                } else {
+                    alert('En fazla 4 cihaz karşılaştırabilirsiniz!');
+                    event.target.checked = false;
+                }
+            } else {
+                selectedDevices = selectedDevices.filter(name => name !== deviceName);
+            }
+            updateCompareList();
+        }
+
+        function updateCompareList() {
+            const compareList = document.getElementById('compare-list');
+            compareList.innerHTML = selectedDevices.join(', ');
+            document.getElementById('compare-button').disabled = selectedDevices.length < 2;
+        }
+
+        // Karşılaştırma modalını göster
+        function showComparison() {
+            const compareTable = document.getElementById('compare-table');
+            compareTable.innerHTML = '';
+
+            const selectedDeviceObjects = devices.filter(device => selectedDevices.includes(device.name));
+
+            let headerRow = '<tr><th>Özellik</th>';
+            selectedDeviceObjects.forEach(device => {
+                headerRow += `<th>${device.name}</th>`;
+            });
+            headerRow += '</tr>';
+            compareTable.innerHTML += headerRow;
+
+            let categoryRow = '<tr><td>Kategori</td>';
+            selectedDeviceObjects.forEach(device => {
+                categoryRow += `<td>${device.category}</td>`;
+            });
+            categoryRow += '</tr>';
+            compareTable.innerHTML += categoryRow;
+
+            let colorsRow = '<tr><td>Renk Seçenekleri</td>';
+            selectedDeviceObjects.forEach(device => {
+                colorsRow += `<td>${device.colors.join(', ')}</td>`;
+            });
+            colorsRow += '</tr>';
+            compareTable.innerHTML += colorsRow;
+
+            let storageRow = '<tr><td>Depolama Seçenekleri</td>';
+            selectedDeviceObjects.forEach(device => {
+                storageRow += `<td>${device.storage.join(', ')}</td>`;
+            });
+            storageRow += '</tr>';
+            compareTable.innerHTML += storageRow;
+
+            const maxSpecs = Math.max(...selectedDeviceObjects.map(device => device.specs.length));
+            for (let i = 0; i < maxSpecs; i++) {
+                let specRow = `<tr><td>Özellik ${i + 1}</td>`;
+                selectedDeviceObjects.forEach(device => {
+                    specRow += `<td>${device.specs[i] || '-'}</td>`;
+                });
+                specRow += '</tr>';
+                compareTable.innerHTML += specRow;
+            }
+
+            document.getElementById('compareModal').style.display = 'block';
+        }
+
+        // Detay Modal işlevselliği
+        const modal = document.getElementById('deviceModal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalImage = document.getElementById('modal-image');
+        const modalColors = document.getElementById('modal-colors');
+        const modalStorage = document.getElementById('modal-storage');
+        const modalSpecs = document.getElementById('modal-specs');
+        const closeBtn = document.getElementsByClassName('close')[0];
+
+        function openModal(deviceName) {
+            const device = devices.find(d => d.name === deviceName);
+            if (device) {
+                modalTitle.textContent = device.name;
+                modalImage.src = device.image;
+                modalColors.innerHTML = device.colors.map(color => `<span class="color-circle" style="background-color: ${colorToHex(color)};"></span>`).join('');
+                modalStorage.textContent = device.storage.join(', ');
+                modalSpecs.innerHTML = device.specs.map(spec => `<li>${spec}</li>`).join('');
+                showSimilarDevices(device);
+                modal.style.display = 'block';
+            }
+        }
+
+        closeBtn.onclick = function() {
+            modal.style.display = 'none';
+        };
+
+        // Karşılaştırma Modal işlevselliği
+        const compareModal = document.getElementById('compareModal');
+        const closeCompareBtn = document.getElementsByClassName('close-compare')[0];
+
+        closeCompareBtn.onclick = function() {
+            compareModal.style.display = 'none';
+        };
+
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+            if (event.target === compareModal) {
+                compareModal.style.display = 'none';
+            }
+        };
+
+        // Sosyal Medya Paylaşımı
+        function shareDevice() {
+            const deviceName = modalTitle.textContent;
+            const url = `${window.location.origin}/devices/${deviceName}`;
+            const text = `${deviceName} modelini WTelecome'da incele!`;
+            if (navigator.share) {
+                navigator.share({
+                    title: deviceName,
+                    text: text,
+                    url: url
+                });
+            } else {
+                alert(`Bu cihazı paylaş: ${url}`);
+            }
+        }
+
+        // Benzer Ürün Önerileri
+        function showSimilarDevices(device) {
+            const similarDevices = devices.filter(d => d.category === device.category && d.name !== device.name).slice(0, 3);
+            const similarSection = document.getElementById('similar-devices');
+            similarSection.innerHTML = `<h3>${translations[currentLang]["Benzer Ürünler"]}</h3>${similarDevices.map(d => `<p>${d.name}</p>`).join('')}`;
+        }
+
+        // Geri Bildirim Gönderme
+        function submitFeedback() {
+            const feedback = document.getElementById('feedback-input').value;
+            // Firebase'e geri bildirim gönderme
+            alert('Geri bildiriminiz gönderildi!');
+        }
+
+        // Çoklu Dil Desteği
+        function changeLanguage(lang) {
+            currentLang = lang;
+            document.getElementById('search-input').placeholder = translations[lang]["Cihaz ara..."];
+            document.getElementById('category-filter').innerHTML = `
+                <option value="all">${translations[lang]["Tümü"]}</option>
+                <option value="Telefon">${translations[lang]["Telefonlar"]}</option>
+                <option value="Tablet">${translations[lang]["Tabletler"]}</option>
+                <option value="Akıllı Saat">${translations[lang]["Akıllı Saatler"]}</option>
+                <option value="Kulaklık">${translations[lang]["Kulaklıklar"]}</option>
+            `;
+            document.getElementById('sort-filter').innerHTML = `
+                <option value="default">${translations[lang]["Varsayılan"]}</option>
+                <option value="weight-asc">${translations[lang]["Ağırlık (Artan)"]}</option>
+                <option value="weight-desc">${translations[lang]["Ağırlık (Azalan)"]}</option>
+            `;
+            renderDevices(devices);
+        }
+
+        // QR Kod Yönlendirme
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const deviceName = urlParams.get('device');
+            if (deviceName) {
+                openModal(deviceName);
+            }
+        };
+
+        // İlk yüklemede tüm cihazları göster
+        renderDevices(devices);
+
+        // Service Worker (sw.js içeriği)
+        if ('serviceWorker' in navigator) {
+            const swCode = `
+                self.addEventListener('install', event => {
+                    event.waitUntil(
+                        caches.open('wtelecome-cache').then(cache => {
+                            return cache.addAll([
+                                'index.html',
+                                'wtelecome-logo.png'
+                            ]);
+                        })
+                    );
+                });
+
+                self.addEventListener('fetch', event => {
+                    event.respondWith(
+                        caches.match(event.request).then(response => {
+                            return response || fetch(event.request);
+                        })
+                    );
+                });
+            `;
+            const blob = new Blob([swCode], { type: 'application/javascript' });
+            const url = URL.createObjectURL(blob);
+            navigator.serviceWorker.register(url);
+        }
+
+        // Manifest'i dinamik olarak ekleme
+        const manifest = document.getElementById('manifest-json').textContent;
+        const blob = new Blob([manifest], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('link');
+        link.rel = 'manifest';
+        link.href = url;
+        document.head.appendChild(link);
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=[Your-GA-ID]"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '[Your-GA-ID]');
+    </script>
+</body>
+</html>
