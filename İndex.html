@@ -25,7 +25,7 @@
     }
     </script>
 
-    <!-- CSS içeriği (styles.css) -->
+    <!-- CSS içeriği -->
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -33,40 +33,34 @@
             color: #fff;
             margin: 0;
             padding: 0;
-            -webkit-user-select: none; /* Safari */
-            -ms-user-select: none; /* IE */
-            user-select: none; /* Standart */
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
-
         header {
             text-align: center;
             padding: 20px;
             background-color: #0F1A2F;
             position: relative;
         }
-
         .logo {
             font-size: 2.5em;
             font-weight: bold;
             color: #FFFFFF;
         }
-
         h1 {
             margin: 10px 0;
             font-size: 2em;
         }
-
         #language-switcher {
             position: absolute;
             top: 20px;
             right: 20px;
         }
-
         #search {
             text-align: center;
             padding: 10px;
         }
-
         #search input {
             padding: 8px;
             width: 90%;
@@ -77,16 +71,13 @@
             border: 1px solid #00AEEF;
             border-radius: 5px;
         }
-
         #filters {
             text-align: center;
             padding: 10px;
         }
-
         #filters label {
             margin-right: 10px;
         }
-
         #filters select {
             padding: 8px;
             font-size: 1em;
@@ -96,16 +87,13 @@
             border: 1px solid #00AEEF;
             border-radius: 5px;
         }
-
         #compare-section {
             text-align: center;
             padding: 10px;
         }
-
         #compare-list {
             margin: 10px 0;
         }
-
         #compare-button {
             background-color: #FF0000;
             color: #fff;
@@ -114,14 +102,12 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 1em;
-            touch-action: manipulation; /* Mobil cihazlar üçün toxunma optimallaşdırması */
+            touch-action: manipulation;
         }
-
         #compare-button:disabled {
             background-color: #ccc;
             cursor: not-allowed;
         }
-
         #device-list {
             display: flex;
             flex-wrap: wrap;
@@ -129,7 +115,6 @@
             padding: 20px;
             gap: 20px;
         }
-
         .device-card {
             background-color: #2A3B5A;
             border-radius: 10px;
@@ -139,23 +124,19 @@
             transition: transform 0.2s;
             animation: fadeIn 0.5s ease-in;
         }
-
         .device-card:hover {
             transform: scale(1.05);
         }
-
         .device-card img {
             width: 100%;
             height: 150px;
             object-fit: cover;
             border-radius: 5px;
         }
-
         .device-card h3 {
             margin: 10px 0;
             font-size: 1.2em;
         }
-
         .device-card button {
             background-color: #00AEEF;
             color: #fff;
@@ -165,30 +146,18 @@
             cursor: pointer;
             margin: 5px;
             font-size: 1em;
-            touch-action: manipulation; /* Mobil cihazlar üçün toxunma optimallaşdırması */
+            touch-action: manipulation;
         }
-
         .device-card button:hover {
             background-color: #008BCF;
         }
-
         .device-card input[type="checkbox"] {
             margin-top: 10px;
         }
-
-        .color-circle {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            margin-right: 5px;
-        }
-
         #store-info, #feedback {
             text-align: center;
             padding: 20px;
         }
-
         #feedback textarea {
             width: 90%;
             max-width: 300px;
@@ -199,7 +168,6 @@
             border-radius: 5px;
             padding: 8px;
         }
-
         #feedback button {
             background-color: #FF0000;
             color: #fff;
@@ -210,12 +178,9 @@
             font-size: 1em;
             touch-action: manipulation;
         }
-
         #feedback button:hover {
             background-color: #E60000;
         }
-
-        /* Modal Stilleri */
         .modal {
             display: none;
             position: fixed;
@@ -227,7 +192,6 @@
             background-color: rgba(0, 0, 0, 0.5);
             overflow-y: auto;
         }
-
         .modal-content {
             background-color: #2A3B5A;
             margin: 10% auto;
@@ -236,34 +200,28 @@
             width: 90%;
             max-width: 600px;
         }
-
         .modal-content img {
             width: 100%;
             max-height: 300px;
             object-fit: cover;
             border-radius: 5px;
         }
-
         .compare-modal-content {
             max-width: 95%;
             overflow-x: auto;
         }
-
         #compare-table {
             width: 100%;
             border-collapse: collapse;
         }
-
         #compare-table th, #compare-table td {
             border: 1px solid #fff;
             padding: 10px;
             text-align: left;
         }
-
         #compare-table th {
             background-color: #0F1A2F;
         }
-
         .close, .close-compare {
             color: #aaa;
             float: right;
@@ -271,44 +229,25 @@
             font-weight: bold;
             cursor: pointer;
         }
-
         .close:hover, .close-compare:hover {
             color: #fff;
         }
-
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
-
-        /* Mobil cihazlar üçün media sorgusu */
         @media (max-width: 600px) {
-            .logo {
-                font-size: 1.8em;
-            }
-            h1 {
-                font-size: 1.5em;
-            }
-            #language-switcher {
-                top: 10px;
-                right: 10px;
-            }
-            .device-card {
-                width: 100%;
-                max-width: 300px;
-            }
-            #filters select {
-                width: 100%;
-                max-width: 200px;
-            }
+            .logo { font-size: 1.8em; }
+            h1 { font-size: 1.5em; }
+            #language-switcher { top: 10px; right: 10px; }
+            .device-card { width: 100%; max-width: 300px; }
+            #filters select { width: 100%; max-width: 200px; }
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="logo">
-            WTelecome
-        </div>
+        <div class="logo">WTelecome</div>
         <h1>WTelecome Məhsul Kataloqu</h1>
         <div id="language-switcher">
             <label for="language-select">Dil:</label>
@@ -336,7 +275,7 @@
             <label for="brand-filter">Marka Seç:</label>
             <select id="brand-filter" onchange="advancedFilter()">
                 <option value="all">Hamısı</option>
-                <option value="iPhone">Apple</option>
+                <option value="Apple">Apple</option>
                 <option value="Samsung">Samsung</option>
                 <option value="Xiaomi">Xiaomi</option>
             </select>
@@ -359,9 +298,7 @@
             <div id="compare-list"></div>
             <button id="compare-button" onclick="showComparison()" disabled>Müqayisə et</button>
         </section>
-        <section id="device-list">
-            <!-- Cihazlar buraya dinamik olaraq əlavə olunacaq -->
-        </section>
+        <section id="device-list"></section>
         <section id="store-info">
             <h3>Mağazamızı Ziyarət Edin</h3>
             <p>Ünvan: [Mağaza ünvanınız]</p>
@@ -386,7 +323,6 @@
             <h3>Xüsusiyyətlər</h3>
             <ul id="modal-specs"></ul>
             <button onclick="shareDevice()">Paylaş</button>
-            <div id="similar-devices"></div>
         </div>
     </div>
 
@@ -399,129 +335,56 @@
         </div>
     </div>
 
-    <!-- JavaScript içeriği (script.js) -->
+    <!-- JavaScript içeriği -->
     <script>
-        // Çevirilər (translations) və digər funksiyalar eyni qalır, yalnız giriş dili dəyişir
         const translations = {
             "tr": {
-                "Tümü": "Tümü",
-                "Telefonlar": "Telefonlar",
-                "Tabletler": "Tabletler",
-                "Akıllı Saatler": "Akıllı Saatler",
-                "Kulaklıklar": "Kulaklıklar",
-                "Cihaz ara...": "Cihaz ara...",
-                "Kategori Seç": "Kategori Seç:",
-                "Marka Seç": "Marka Seç:",
-                "Depolama Seç": "Depolama Seç:",
-                "Sırala": "Sırala:",
-                "Varsayılan": "Varsayılan",
-                "Ağırlık (Artan)": "Ağırlık (Artan)",
-                "Ağırlık (Azalan)": "Ağırlık (Azalan)",
-                "Karşılaştırma": "Karşılaştırma",
-                "Karşılaştır": "Karşılaştır",
-                "Detayları Gör": "Detayları Gör",
-                "Karşılaştırmaya Ekle": "Karşılaştırmaya Ekle",
-                "Mağazamızı Ziyaret Edin": "Mağazamızı Ziyaret Edin",
-                "Geri Bildirim": "Geri Bildirim",
-                "Görüşlerinizi yazın...": "Görüşlerinizi yazın...",
-                "Gönder": "Gönder",
-                "Renk Seçenekleri": "Renk Seçenekleri:",
-                "Depolama Seçenekleri": "Depolama Seçenekleri:",
-                "Özellikler": "Özellikler",
-                "Paylaş": "Paylaş",
-                "Benzer Ürünler": "Benzer Ürünler"
+                "Tümü": "Tümü", "Telefonlar": "Telefonlar", "Tabletler": "Tabletler", "Akıllı Saatler": "Akıllı Saatler", "Kulaklıklar": "Kulaklıklar",
+                "Cihaz ara...": "Cihaz ara...", "Kategori Seç": "Kategori Seç:", "Marka Seç": "Marka Seç:", "Depolama Seç": "Depolama Seç:",
+                "Sırala": "Sırala:", "Varsayılan": "Varsayılan", "Ağırlık (Artan)": "Ağırlık (Artan)", "Ağırlık (Azalan)": "Ağırlık (Azalan)",
+                "Karşılaştırma": "Karşılaştırma", "Karşılaştır": "Karşılaştır", "Detayları Gör": "Detayları Gör", "Karşılaştırmaya Ekle": "Karşılaştırmaya Ekle",
+                "Mağazamızı Ziyaret Edin": "Mağazamızı Ziyaret Edin", "Geri Bildirim": "Geri Bildirim", "Görüşlerinizi yazın...": "Görüşlerinizi yazın...",
+                "Gönder": "Gönder", "Renk Seçenekleri": "Renk Seçenekleri:", "Depolama Seçenekleri": "Depolama Seçenekleri:", "Özellikler": "Özellikler",
+                "Paylaş": "Paylaş", "Benzer Ürünler": "Benzer Ürünler"
             },
             "az": {
-                "Tümü": "Hamısı",
-                "Telefonlar": "Telefonlar",
-                "Tabletler": "Planşetlər",
-                "Akıllı Saatler": "Ağıllı Saatlar",
-                "Kulaklıklar": "Qulaqlıqlar",
-                "Cihaz ara...": "Cihaz axtar...",
-                "Kategori Seç": "Kateqoriya Seç:",
-                "Marka Seç": "Marka Seç:",
-                "Depolama Seç": "Yaddaş Seç:",
-                "Sırala": "Sırala:",
-                "Varsayılan": "Varsayılan",
-                "Ağırlık (Artan)": "Çəki (Artan)",
-                "Ağırlık (Azalan)": "Çəki (Azalan)",
-                "Karşılaştırma": "Müqayisə",
-                "Karşılaştır": "Müqayisə et",
-                "Detayları Gör": "Təfərrüatlara Bax",
-                "Karşılaştırmaya Ekle": "Müqayisəyə Əlavə Et",
-                "Mağazamızı Ziyaret Edin": "Mağazamızı Ziyarət Edin",
-                "Geri Bildirim": "Rəy",
-                "Görüşlerinizi yazın...": "Rəylərinizi yazın...",
-                "Gönder": "Göndər",
-                "Renk Seçenekleri": "Rəng Seçimləri:",
-                "Depolama Seçenekleri": "Yaddaş Seçimləri:",
-                "Özellikler": "Xüsusiyyətlər",
-                "Paylaş": "Paylaş",
-                "Benzer Ürünler": "Oxşar Məhsullar"
+                "Tümü": "Hamısı", "Telefonlar": "Telefonlar", "Tabletler": "Planşetlər", "Akıllı Saatler": "Ağıllı Saatlar", "Kulaklıklar": "Qulaqlıqlar",
+                "Cihaz ara...": "Cihaz axtar...", "Kategori Seç": "Kateqoriya Seç:", "Marka Seç": "Marka Seç:", "Depolama Seç": "Yaddaş Seç:",
+                "Sırala": "Sırala:", "Varsayılan": "Varsayılan", "Ağırlık (Artan)": "Çəki (Artan)", "Ağırlık (Azalan)": "Çəki (Azalan)",
+                "Karşılaştırma": "Müqayisə", "Karşılaştır": "Müqayisə et", "Detayları Gör": "Təfərrüatlara Bax", "Karşılaştırmaya Ekle": "Müqayisəyə Əlavə Et",
+                "Mağazamızı Ziyaret Edin": "Mağazamızı Ziyarət Edin", "Geri Bildirim": "Rəy", "Görüşlerinizi yazın...": "Rəylərinizi yazın...",
+                "Gönder": "Göndər", "Renk Seçenekleri": "Rəng Seçimləri:", "Depolama Seçenekleri": "Yaddaş Seçimləri:", "Özellikler": "Xüsusiyyətlər",
+                "Paylaş": "Paylaş", "Benzer Ürünler": "Oxşar Məhsullar"
             },
             "en": {
-                "Tümü": "All",
-                "Telefonlar": "Phones",
-                "Tabletler": "Tablets",
-                "Akıllı Saatler": "Smart Watches",
-                "Kulaklıklar": "Earphones",
-                "Cihaz ara...": "Search device...",
-                "Kategori Seç": "Select Category:",
-                "Marka Seç": "Select Brand:",
-                "Depolama Seç": "Select Storage:",
-                "Sırala": "Sort:",
-                "Varsayılan": "Default",
-                "Ağırlık (Artan)": "Weight (Ascending)",
-                "Ağırlık (Azalan)": "Weight (Descending)",
-                "Karşılaştırma": "Comparison",
-                "Karşılaştır": "Compare",
-                "Detayları Gör": "View Details",
-                "Karşılaştırmaya Ekle": "Add to Comparison",
-                "Mağazamızı Ziyaret Edin": "Visit Our Store",
-                "Geri Bildirim": "Feedback",
-                "Görüşlerinizi yazın...": "Write your feedback...",
-                "Gönder": "Submit",
-                "Renk Seçenekleri": "Color Options:",
-                "Depolama Seçenekleri": "Storage Options:",
-                "Özellikler": "Specifications",
-                "Paylaş": "Share",
-                "Benzer Ürünler": "Similar Products"
+                "Tümü": "All", "Telefonlar": "Phones", "Tabletler": "Tablets", "Akıllı Saatler": "Smart Watches", "Kulaklıklar": "Earphones",
+                "Cihaz ara...": "Search device...", "Kategori Seç": "Select Category:", "Marka Seç": "Select Brand:", "Depolama Seç": "Select Storage:",
+                "Sırala": "Sort:", "Varsayılan": "Default", "Ağırlık (Artan)": "Weight (Ascending)", "Ağırlık (Azalan)": "Weight (Descending)",
+                "Karşılaştırma": "Comparison", "Karşılaştır": "Compare", "Detayları Gör": "View Details", "Karşılaştırmaya Ekle": "Add to Comparison",
+                "Mağazamızı Ziyaret Edin": "Visit Our Store", "Geri Bildirim": "Feedback", "Görüşlerinizi yazın...": "Write your feedback...",
+                "Gönder": "Submit", "Renk Seçenekleri": "Color Options:", "Depolama Seçenekleri": "Storage Options:", "Özellikler": "Specifications",
+                "Paylaş": "Share", "Benzer Ürünler": "Similar Products"
             },
             "ru": {
-                "Tümü": "Все",
-                "Telefonlar": "Телефоны",
-                "Tabletler": "Планшеты",
-                "Akıllı Saatler": "Умные часы",
-                "Kulaklıklar": "Наушники",
-                "Cihaz ara...": "Поиск устройства...",
-                "Kategori Seç": "Выберите категорию:",
-                "Marka Seç": "Выберите бренд:",
-                "Depolama Seç": "Выберите объем памяти:",
-                "Sırala": "Сортировать:",
-                "Varsayılan": "По умолчанию",
-                "Ağırlık (Artan)": "Вес (по возрастанию)",
-                "Ağırlık (Azalan)": "Вес (по убыванию)",
-                "Karşılaştırma": "Сравнение",
-                "Karşılaştır": "Сравнить",
-                "Detayları Gör": "Посмотреть детали",
-                "Karşılaştırmaya Ekle": "Добавить к сравнению",
-                "Mağazamızı Ziyaret Edin": "Посетите наш магазин",
-                "Geri Bildirim": "Обратная связь",
-                "Görüşlerinizi yazın...": "Напишите ваш отзыв...",
-                "Gönder": "Отправить",
-                "Renk Seçenekleri": "Варианты цвета:",
-                "Depolama Seçenekleri": "Варианты памяти:",
-                "Özellikler": "Характеристики",
-                "Paylaş": "Поделиться",
-                "Benzer Ürünler": "Похожие товары"
+                "Tümü": "Все", "Telefonlar": "Телефоны", "Tabletler": "Планшеты", "Akıllı Saatler": "Умные часы", "Kulaklıklar": "Наушники",
+                "Cihaz ara...": "Поиск устройства...", "Kategori Seç": "Выберите категорию:", "Marka Seç": "Выберите бренд:", "Depolama Seç": "Выберите объем памяти:",
+                "Sırala": "Сортировать:", "Varsayılan": "По умолчанию", "Ağırlık (Artan)": "Вес (по возрастанию)", "Ağırlık (Azalan)": "Вес (по убыванию)",
+                "Karşılaştırma": "Сравнение", "Karşılaştır": "Сравнить", "Detayları Gör": "Посмотреть детали", "Karşılaştırmaya Ekle": "Добавить к сравнению",
+                "Mağazamızı Ziyaret Edin": "Посетите наш магазин", "Geri Bildirim": "Обратная связь", "Görüşlerinizi yazın...": "Напишите ваш отзыв...",
+                "Gönder": "Отправить", "Renk Seçenekleri": "Варианты цвета:", "Depolama Seçenekleri": "Варианты памяти:", "Özellikler": "Характеристики",
+                "Paylaş": "Поделиться", "Benzer Ürünler": "Похожие товары"
             }
         };
 
-        // Qalan JavaScript kodları (colorToHex, devices, və s.) eyni qalır, yalnız giriş dili dəyişir
+        const devices = [
+            { name: "iPhone 14", image: "https://via.placeholder.com/150", category: "Telefon", brand: "Apple", storage: "128GB", weight: 174, colors: ["Black", "White"], specs: ["A15 Bionic", "6.1 inch"] },
+            { name: "Samsung Galaxy S23", image: "https://via.placeholder.com/150", category: "Telefon", brand: "Samsung", storage: "256GB", weight: 168, colors: ["Green", "Black"], specs: ["Snapdragon 8 Gen 2", "6.1 inch"] },
+            { name: "Xiaomi Pad 6", image: "https://via.placeholder.com/150", category: "Tablet", brand: "Xiaomi", storage: "128GB", weight: 490, colors: ["Gray"], specs: ["Snapdragon 870", "11 inch"] }
+        ];
 
         const deviceList = document.getElementById('device-list');
         let selectedDevices = [];
-        let currentLang = 'az'; // Giriş dili Azərbaycan dili olaraq təyin edildi
+        let currentLang = 'az';
 
         function renderDevices(filteredDevices) {
             deviceList.innerHTML = '';
@@ -539,9 +402,98 @@
             });
         }
 
-        // Qalan funksiyalar (searchDevices, advancedFilter, sortDevices və s.) eyni qalır
+        function searchDevices() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const filtered = devices.filter(device => device.name.toLowerCase().includes(query));
+            renderDevices(filtered);
+        }
 
-        // Dil dəyişikliyi funksiyası
+        function advancedFilter() {
+            const category = document.getElementById('category-filter').value;
+            const brand = document.getElementById('brand-filter').value;
+            const storage = document.getElementById('storage-filter').value;
+            let filtered = devices;
+            if (category !== "all") filtered = filtered.filter(d => d.category === category);
+            if (brand !== "all") filtered = filtered.filter(d => d.brand === brand);
+            if (storage !== "all") filtered = filtered.filter(d => d.storage === storage);
+            renderDevices(filtered);
+        }
+
+        function sortDevices() {
+            const sort = document.getElementById('sort-filter').value;
+            let sorted = [...devices];
+            if (sort === "weight-asc") sorted.sort((a, b) => a.weight - b.weight);
+            if (sort === "weight-desc") sorted.sort((a, b) => b.weight - a.weight);
+            renderDevices(sorted);
+        }
+
+        function openModal(deviceName) {
+            const device = devices.find(d => d.name === deviceName);
+            if (device) {
+                document.getElementById('modal-title').textContent = device.name;
+                document.getElementById('modal-image').src = device.image;
+                document.getElementById('modal-colors').textContent = device.colors.join(", ");
+                document.getElementById('modal-storage').textContent = device.storage;
+                const specsList = document.getElementById('modal-specs');
+                specsList.innerHTML = '';
+                device.specs.forEach(spec => {
+                    const li = document.createElement('li');
+                    li.textContent = spec;
+                    specsList.appendChild(li);
+                });
+                document.getElementById('deviceModal').style.display = 'block';
+            }
+        }
+
+        function toggleCompare(deviceName, checked) {
+            if (checked) {
+                selectedDevices.push(deviceName);
+            } else {
+                selectedDevices = selectedDevices.filter(d => d !== deviceName);
+            }
+            document.getElementById('compare-button').disabled = selectedDevices.length < 2;
+            document.getElementById('compare-list').textContent = selectedDevices.join(", ");
+        }
+
+        function showComparison() {
+            const compareTable = document.getElementById('compare-table');
+            compareTable.innerHTML = '';
+            const headerRow = document.createElement('tr');
+            headerRow.innerHTML = '<th>Xüsusiyyət</th>' + selectedDevices.map(d => `<th>${d}</th>`).join('');
+            compareTable.appendChild(headerRow);
+
+            const rows = [
+                { name: "Marka", key: "brand" },
+                { name: "Yaddaş", key: "storage" },
+                { name: "Çəki", key: "weight" }
+            ];
+            rows.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>${row.name}</td>` + selectedDevices.map(d => {
+                    const device = devices.find(dev => dev.name === d);
+                    return `<td>${device[row.key]}</td>`;
+                }).join('');
+                compareTable.appendChild(tr);
+            });
+
+            document.getElementById('compareModal').style.display = 'block';
+        }
+
+        function submitFeedback() {
+            const feedback = document.getElementById('feedback-input').value;
+            alert("Rəyiniz: " + feedback);
+            document.getElementById('feedback-input').value = '';
+        }
+
+        function shareDevice() {
+            const title = document.getElementById('modal-title').textContent;
+            if (navigator.share) {
+                navigator.share({ title, url: window.location.href });
+            } else {
+                alert("Paylaşma dəstəklənmir.");
+            }
+        }
+
         function changeLanguage(lang) {
             currentLang = lang;
             document.getElementById('search-input').placeholder = translations[lang]["Cihaz ara..."];
@@ -560,33 +512,30 @@
             renderDevices(devices);
         }
 
-        // Səhifə yüklənərkən Azərbaycan dilini tətbiq et
-        window.onload = function() {
-            changeLanguage('az'); // Giriş dili Azərbaycan dili olaraq təyin olunur
-            const urlParams = new URLSearchParams(window.location.search);
-            const deviceName = urlParams.get('device');
-            if (deviceName) {
-                openModal(deviceName);
-            }
+        document.querySelector('.close').onclick = function() {
+            document.getElementById('deviceModal').style.display = 'none';
         };
 
-        // İlk yükləmədə cihazları göstər
-        renderDevices(devices);
+        document.querySelector('.close-compare').onclick = function() {
+            document.getElementById('compareModal').style.display = 'none';
+        };
 
-        // Service Worker və Manifest eyni qalır
+        window.onload = function() {
+            changeLanguage('az');
+            renderDevices(devices);
+        };
+
+        /*
+        // Service Worker (lokal test üçün şərhə alınmışdır)
         if ('serviceWorker' in navigator) {
             const swCode = `
                 self.addEventListener('install', event => {
                     event.waitUntil(
                         caches.open('wtelecome-cache').then(cache => {
-                            return cache.addAll([
-                                'index.html',
-                                'wtelecome-logo.png'
-                            ]);
+                            return cache.addAll(['index.html', 'wtelecome-logo.png']);
                         })
                     );
                 });
-
                 self.addEventListener('fetch', event => {
                     event.respondWith(
                         caches.match(event.request).then(response => {
@@ -600,22 +549,15 @@
             navigator.serviceWorker.register(url);
         }
 
-        const manifest = document.getElementById('manifest-json').textContent;
-        const blob = new Blob([manifest], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('link');
-        link.rel = 'manifest';
-        link.href = url;
-        document.head.appendChild(link);
-    </script>
-
-    <!-- Google Analytics (öz ID-nizi əlavə edin) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=[Your-GA-ID]"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', '[Your-GA-ID]');
+        // Google Analytics (öz ID-nizi əlavə edin)
+        <script async src="https://www.googletagmanager.com/gtag/js?id=[Your-GA-ID]"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '[Your-GA-ID]');
+        </script>
+        */
     </script>
 </body>
 </html>
